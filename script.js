@@ -1,3 +1,9 @@
+window.onload = function () {
+  getRepos();
+  getNamesAndDescriptions();
+  loadCards();
+};
+
 function me() {
   document.getElementById("me").scrollIntoView({ behavior: "smooth" });
   document
@@ -65,8 +71,94 @@ const projectPaths = {
 document.getElementById("projects").addEventListener("click", (event) => {
   const card = event.target.closest("div[id^='projectcard']");
   if (card && projectPaths[card.id]) {
-
     window.open(`${profile}/${projectPaths[card.id]}/`, "_blank");
-
   }
 });
+
+const profilelink = "https://api.github.com/hackerzsalmale";
+
+let repocount = "0";
+let repos = [];
+
+function cards() {
+  console.log(profilelink); // now safe
+}
+
+function cards() {
+  fetch("https://api.github.com/users/HackerZsalmale/repos")
+    .then((response) => response.json())
+    .then((data) => {
+      let repos = data.html_url;
+      console.log("Updated repos:", repos);
+    })
+    .catch((err) => console.error("miaw"));
+
+  console.log("Initial repos:", repos);
+}
+
+async function getRepos() {
+  try {
+    const response = await fetch(
+      "https://api.github.com/users/HackerZsalmale/repos"
+    );
+    const repos = await response.json();
+
+    const repoLinks = repos.map((repo) => repo.html_url);
+
+    console.log("repo links: ", repoLinks);
+    return repoLinks;
+  } catch (err) {
+    console.error("Error fetching repos:", err);
+    return [];
+  }
+}
+
+async function getNamesAndDescriptions() {
+  try {
+    const response = await fetch(
+      "https://api.github.com/users/HackerZsalmale/repos"
+    );
+    const repos = await response.json();
+
+    const repoNames = repos.map((repo) => repo.name);
+    const descriptions = repos.map((repo) => repo.description);
+
+    console.log("Repo names:", repoNames);
+    console.log("Descriptions:", descriptions);
+
+    return { repoNames, descriptions };
+  } catch (err) {
+    console.error("Error fetching repos:", err);
+    return { repoNames: [], descriptions: [] };
+  }
+}
+
+async function loadCards() {
+  const projectslist = document.getElementsByClassName("projectlist")[0];
+
+  const response = await fetch(
+    "https://api.github.com/users/HackerZsalmale/repos"
+  );
+  const repos = await response.json();
+
+  const repoLinks = repos.map((repo) => repo.html_url);
+  const repoNames = repos.map((repo) => repo.name);
+  const descriptions = repos.map(
+    (repo) => repo.description || "No description"
+  );
+
+  projectslist.innerHTML = "";
+
+  for (let i = 0; i < repos.length; i++) {
+    projectslist.innerHTML += `
+            <div class="project-card" id="${repoNames[i]}">
+                <h3>${repoNames[i]}</h3>
+                <p>${descriptions[i]}</p>
+            </div>
+        `;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadCards);
+
+document.getElementById("open").addEventListener("click", cards);
