@@ -46,6 +46,8 @@ body {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  
+  color: white;
 }
 
 .projectlist {
@@ -167,7 +169,7 @@ nav a:active::after {
   align-items: flex-end;
 }
 
-.name {
+.name a {
   color: color-mix(in hsl shorter hue, rgb(26, 15, 126) 80%, rgb(17, 116, 33) 20%);
   font-size: 40px;
   font-family: 'Poppins', sans-serif;
@@ -178,6 +180,7 @@ nav a:active::after {
 .profession {
   width: 95%;
   justify-self: center;
+  color: white;
 }
 
 
