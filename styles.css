@@ -29,8 +29,9 @@ html {
     font-family: "Courier New", monospace;
     width: 500px;
     height: 300px;
+    padding: 10px;
     border: 2px solid grey;
-    border-radius: 17px;
+    border-radius: 10px;
     background-color: rgb(0, 0, 0);
     font-size: 18.4px;
 }
@@ -147,17 +148,19 @@ nav a:hover {
 #about-section div {
     width: 600px;
     height: 600px;
-    color:white;
-    z-index: 0;
+    color: white;
+
     background-color: black;
     border: 2px solid darkgrey;
     border-radius: 17px;
     transition-duration: 0.3s;
 }
+
 #aboutme p {
-    padding:20px;
+    padding: 20px;
     color: rgb(219, 48, 18);
 }
+
 #aboutme h2 {
     text-align: center;
 }
@@ -170,7 +173,7 @@ nav a:hover {
     margin-top: -20px;
     height: 800px;
     background-color: rgb(19, 19, 19);
-    display: none;
+
 }
 
 #skillstitle {
@@ -196,9 +199,26 @@ nav a:hover {
     width: 80%;
     height: 40px;
     background-color: white;
-    ;
+
 }
 
+#github {
+    margin-top: 30px;
+    width: 120px;
+    height: 60px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 27px;
+    transition-duration: 0.3s;
+    background: #0053d9;
+    border: 0px;
+    font-size: 18px;
+    background: linear-gradient(90deg,- rgba(0, 83, 217, 1) 0%, rgba(117, 246, 255, 1) 100%);
+}
+
+#github:hover {
+    transition-duration: 0.3s;
+    transform: scale(1.03);
+}
 
 
 @keyframes fadeInUp {
