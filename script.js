@@ -40,3 +40,6 @@ async function loadContent() {
   }
 }
 
+async function github() {
+    window.open("https://github.qandor.hu", "_self");
+}
