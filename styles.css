@@ -212,7 +212,7 @@ nav a:hover {
     background: #0053d9;
     border: 0px;
     font-size: 18px;
-    background: linear-gradient(90deg,- rgba(0, 83, 217, 1) 0%, rgba(117, 246, 255, 1) 100%);
+    background: linear-gradient(90deg, - rgba(0, 83, 217, 1) 0%, rgba(117, 246, 255, 1) 100%);
 }
 
 #github:hover {
