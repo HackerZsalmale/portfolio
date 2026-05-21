@@ -8,9 +8,6 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 
-
-
-
 async function github() {
     window.open("https://github.qandor.hu", "_self");
 }
