@@ -1,9 +1,23 @@
-const lenis = new Lenis();
 
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
+
+/* ────────────────────────────────────────────────
+   IntersectionObserver – show elements on scroll
+   ──────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);   // optional: stop observing once shown
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+});
+
 
 requestAnimationFrame(raf);
 
@@ -11,47 +25,48 @@ window.addEventListener("load", function () {
   loadContent();
 });
 
-function home() {
-  document
-    .getElementById("homebutton")
-    .addEventListener("click", function () {
-      lenis.scrollTo("#home-section", {
+function bindScrollButton(buttonId, sectionId) {
+  const button = document.getElementById(buttonId);
+
+  if (!button) return;
+
+  button.addEventListener("click", function () {
+    const target = document.querySelector(sectionId);
+
+    if (typeof lenis !== "undefined" && lenis && typeof lenis.scrollTo === "function") {
+      lenis.scrollTo(sectionId, {
         offset: 0,
         immediate: false,
         duration: 1.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         force: true,
       });
-    });
+      return;
+    }
+
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
+
+function home() {
+  bindScrollButton("homebutton", "#home-section");
 }
 
 function about() {
-  document
-    .getElementById("aboutbutton")
-    .addEventListener("click", function () {
-      lenis.scrollTo("#about-section", {
-        offset: 0,
-        immediate: false,
-        duration: 1.5,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        force: true,
-      });
-    });
+  bindScrollButton("aboutbutton", "#about-section");
 }
 
 function skills() {
-  document
-    .getElementById("skillsbutton")
-    .addEventListener("click", function () {
-      lenis.scrollTo("#skills-section", {
-        offset: 0,
-        immediate: false,
-        duration: 1.5,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        force: true,
-      });
-    });
+  bindScrollButton("skillsbutton", "#skills-section");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  home();
+  about();
+  skills();
+});
 
 async function github() {
   window.open("https://github.qandor.hu", "_self");

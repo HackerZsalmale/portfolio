@@ -303,3 +303,20 @@ background: linear-gradient(90deg, #00ff88 0%, #00b3ff 100%);
     }
 }
 
+
+/* ────────────────────────────────────────────────
+   Scroll‑triggered fade‑in / slide‑up
+   ──────────────────────────────────────────────── */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity .6s ease-out,
+        transform .8s cubic-bezier(.3,.05,.67,.13);
+}
+
+/* When the element becomes visible → show it */
+.animate-on-scroll.visible {
+    opacity: 1 !important;          /* override any inline style */
+    transform: translateY(0) !important;
+}
